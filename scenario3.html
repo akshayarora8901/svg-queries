@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>NuSvg</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <style>
+  body {
+    background-color: #EEE;
+  }
+  
+  .svg-wrapper {
+    width: 95%;
+    margin: auto;
+    background-color: #FFF;
+  }
+  </style>
+  <script type="text/javascript" src="nusvg.js"></script>
+  <div class="svg-wrapper">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%" height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
+      <g>
+        <rect id="shape1" x="10" y="50" fill="#53DBD1" width="100" height="100" />
+        <rect id="shape2" x="150" y="50" fill="#F9E169" width="100" height="100" />
+      </g>
+    </svg>
+  </div>
+  <script>
+  (function() {
+    //////////////////////////////////////////////////////////////
+    // Scenario 3 Test Cases
+    // Shape 1: All Default values present
+    // Shape 2: Only x and y default value present
+    // No values present for shape 2 for variation '<400'
+    // No x present for shape 1 for variation '<400', y present
+    // No y present for shape 1 for variation '<720', x present
+    // Only transform present for shape 2 for variation '<720'
+    //////////////////////////////////////////////////////////////
+    var variations = [
+      {
+        "query": "default",
+        data: {
+          "shape1": {
+            x: 0,
+            y: 0,
+            display: 'block',
+            width: 100,
+            height: 100,
+            fill: "#53DBD1",
+            transform: ''
+          },
+          "shape2": {
+            x: 0,
+            y: 0
+          }
+        }
+      }, {
+        "query": "<460",
+        data: {
+          "shape1": {
+            y: 100,
+            transform: 'scale(1.5)'
+          }
+        }
+      },
+      {
+        "query": "<720",
+        data: {
+          "shape1": {
+            x: 10,
+            display: 'block',
+            transform: 'scale(1.2)'
+          },
+          "shape2": {
+            transform: 'scale(1.4)'
+          }
+        }
+      }
+    ];
+    var svgAsObject = document.querySelector('#Layer_1');
+    console.log('svgAsObject', svgAsObject);
+    window.nuSvg = new NuSvg(svgAsObject, variations);
+    nuSvg.init();
+  })();
+  </script>
+</body>
+
+</html>
